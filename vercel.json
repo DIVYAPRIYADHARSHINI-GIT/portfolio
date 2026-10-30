@@ -1,0 +1,48 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "//": "Plain static site - no framework, no build step, no server runtime.",
+  "framework": null,
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": ".",
+
+  "cleanUrls": true,
+  "trailingSlash": false,
+
+  "//rewrites": "Deep-link / refresh fallback. Vercel checks the filesystem BEFORE applying rewrites, so real files (resume.pdf, assets/*, sitemap.xml) are always served as themselves. The negative lookahead is belt-and-braces: it excludes /assets/* and anything containing a dot (i.e. any real file extension) so an asset can never resolve to the HTML fallback.",
+  "rewrites": [
+    { "source": "/((?!assets/|api/)[^.]*)", "destination": "/index.html" }
+  ],
+
+  "headers": [
+    {
+      "source": "/assets/images/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/assets/(css|js)/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/resume.pdf",
+      "headers": [
+        { "key": "Content-Type", "value": "application/pdf" },
+        { "key": "Content-Disposition", "value": "inline; filename=\"Divyapriyadharshini-S-Resume.pdf\"" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    }
+  ]
+}
