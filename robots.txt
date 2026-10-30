@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://divyapriyadharshini-git.github.io/portfolio/sitemap.xml
+Sitemap: https://portfolio-divya-6411.vercel.app/sitemap.xml

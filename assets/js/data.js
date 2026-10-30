@@ -23,11 +23,12 @@ export const meta = {
   role: "AI Tutor | Data Analyst | ML Data Associate",
   description:
     "AI and Data Analytics professional in Bengaluru. Python, SQL, Power BI, machine learning and AI model training. Open to Data Analyst, BI, Data Science, GenAI and Python roles.",
-  // Update this to the real deployed URL (GitHub Pages / Vercel / Netlify).
-  url: "https://divyapriyadharshini-git.github.io/portfolio/",
+  // Live production URL. Update here (and the canonical/og:url tags in
+  // index.html) if a custom domain is attached later.
+  url: "https://portfolio-divya-6411.vercel.app/",
   locale: "en_IN",
   // 1200 x 630 - Open Graph / Twitter preview card.
-  ogImage: { src: "assets/images/og-image.jpg", w: 1200, h: 630 },
+  ogImage: { src: "https://portfolio-divya-6411.vercel.app/assets/images/og-image.jpg", w: 1200, h: 630 },
   keywords: [
     "Data Analyst",
     "Business Intelligence",

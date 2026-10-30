@@ -122,8 +122,37 @@ caching and security headers.
 **Netlify** — drag the folder into Netlify Drop, or connect the repo.
 [`netlify.toml`](netlify.toml) sets publish dir and headers.
 
-After deploying, update `meta.url` in `data.js`, plus the `<link rel=canonical>`
-and `og:url` in `index.html`, and the URL in `sitemap.xml` / `robots.txt`.
+### Live deployment
+
+| | |
+| --- | --- |
+| Production URL | <https://portfolio-divya-6411.vercel.app> |
+| GitHub repo | <https://github.com/DIVYAPRIYADHARSHINI-GIT/portfolio> |
+| Vercel project | `divya-6411/portfolio` |
+
+Every push to `main` auto-deploys to production.
+
+### Changing the domain later
+
+If a custom domain is attached, update the absolute URLs in these **five**
+places (they must be absolute — Open Graph ignores relative image paths):
+
+1. `assets/js/data.js` → `meta.url` and `meta.ogImage.src`
+2. `index.html` → `<link rel="canonical">`
+3. `index.html` → `og:url`
+4. `index.html` → `og:image`, `og:image:secure_url`, `twitter:image`
+5. `sitemap.xml` `<loc>` and `robots.txt` `Sitemap:`
+
+Then commit and push; Vercel redeploys automatically.
+
+### How the deep-link rewrite works
+
+`vercel.json` rewrites `/(.*)` → `/index.html`. Vercel resolves **static files
+first** and only applies rewrites when nothing matched on disk, so
+`resume.pdf`, `/assets/**`, `sitemap.xml` and `robots.txt` are still served as
+real files with their correct MIME types — verified in the deploy checks. The
+rewrite only catches routes that do not exist, so refreshing or opening a deep
+link never 404s.
 
 ---
 
